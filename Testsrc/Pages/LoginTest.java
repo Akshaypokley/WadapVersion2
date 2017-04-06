@@ -78,7 +78,7 @@ public class LoginTest{
 
         String data[][]=new String[RowCount-1][4];
 
-        for(int i=0;i<RowCount;i++) {
+        for(int i=1;i<RowCount;i++) {
             HSSFRow row = sheet.getRow(i);
 
             HSSFCell UserNameCEll =row.getCell(0);
