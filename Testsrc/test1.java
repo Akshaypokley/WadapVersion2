@@ -13,7 +13,7 @@ public class test1 {
     public void te()
     {
         openbrowser("chrome");
-        getUrl();
+       // getUrl();
     }
 
     @Test

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Akshay85 on 4/5/2017.
  */
-public class login {
+public class Login {
 
     WebDriver driver;
     @FindBy(xpath = "//div[1]/h3")
@@ -23,13 +23,15 @@ public class login {
     @FindBy(xpath = ".//*[@id='formCommon']/input")
     WebElement Login_Button;
 
-    public login (WebDriver driver)
+    public Login(WebDriver driver)
     {
         this.driver=driver;
         PageFactory.initElements(driver,this);
         if(!LoginLogo.isDisplayed())
             throw new IllegalStateException("This not Login page");
     }
+
+
 
     public void setUserName(String userNm)
     {
