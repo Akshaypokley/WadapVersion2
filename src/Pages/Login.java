@@ -23,7 +23,7 @@ public class Login {
     @FindBy(xpath = ".//*[@id='formCommon']/input")
     WebElement Login_Button;
 
-    public Login(WebDriver driver)
+    public Login(WebDriver driver, String s)
     {
         this.driver=driver;
         PageFactory.initElements(driver,this);

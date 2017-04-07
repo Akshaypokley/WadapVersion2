@@ -1,6 +1,8 @@
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static Utilites.LoginFunction.Loginf;
 import static Utilites.OpenBrowser.getUrl;
 import static Utilites.OpenBrowser.openbrowser;
 
@@ -9,11 +11,13 @@ import static Utilites.OpenBrowser.openbrowser;
  */
 public class test1 {
 
+    WebDriver driver1;
     @BeforeClass
     public void te()
     {
-        openbrowser("chrome");
-       // getUrl();
+        driver1= openbrowser("chrome");
+        getUrl("url");
+    Loginf();
     }
 
     @Test

@@ -17,12 +17,11 @@ public class OpenBrowser {
         switch (BroweserName) {
             case "firefox":
 
-                System.setProperty("webdriver.chrome.driver", "Driver/chromedriver.exe");
                 driver = new FirefoxDriver();
 
                 break;
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "Driver/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "Chromedd/chromedriver.exe");
                 driver = new ChromeDriver();
 
 

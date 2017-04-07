@@ -1,18 +1,17 @@
 package Pages;
 
-import com.sun.xml.internal.ws.policy.AssertionSet;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -42,17 +41,32 @@ public class LoginTest{
     @Test(dataProvider = "Exceldata")
     public void UserInput(String UserName,String UserPassword,String Expeted,String Xpath) {
         try {
-            Login login = new Login(driver1);
+            Login login = new Login(driver1, "http://test.tfleet.in/login.aspx");
             login.setUserName(UserName);
             login.setPassword(UserPassword);
             login.ClickLogin_Button();
+
+            WebDriverWait wait = new WebDriverWait(driver1, 15);
+            if(wait.until(ExpectedConditions.alertIsPresent())==null) {
+                System.out.println("alert was not present");
+            } else {
+
+                System.out.println("alert was present");
+                Alert alert = driver1.switchTo().alert();
+                alert.accept();
+            }
 
             try
 
             {
                 String actual;
                 actual = driver1.findElement(By.xpath(Xpath)).getText();
+                System.out.println(actual);
+
                 Assert.assertEquals(actual, Expeted, "Test Pass");
+
+
+
             } catch (AssertionError e) {
                 System.out.println(e);
             }
@@ -62,6 +76,7 @@ public class LoginTest{
         } catch (Throwable e) {
             System.out.println(e);
         }
+        driver1.close();
     }
 
     @DataProvider
@@ -88,7 +103,7 @@ public class LoginTest{
             }
             else
             {
-                UserNameCEll.setCellValue(Cell.CELL_TYPE_STRING);
+                UserNameCEll.setCellType(Cell.CELL_TYPE_STRING);
                 data[i-1][0]=UserNameCEll.getStringCellValue();
             }
 
@@ -99,7 +114,7 @@ public class LoginTest{
             }
             else
             {
-                PasswordCEll.setCellValue(Cell.CELL_TYPE_STRING);
+                PasswordCEll.setCellType(Cell.CELL_TYPE_STRING);
                 data[i-1][1]=PasswordCEll.getStringCellValue();
             }
 
@@ -111,7 +126,7 @@ public class LoginTest{
             }
             else
             {
-                ExpectedCEll.setCellValue(Cell.CELL_TYPE_STRING);
+                ExpectedCEll.setCellType(Cell.CELL_TYPE_STRING);
                 data[i-1][2]=ExpectedCEll.getStringCellValue();
             }
 
@@ -122,7 +137,7 @@ public class LoginTest{
             }
             else
             {
-                XpathCEll.setCellValue(Cell.CELL_TYPE_STRING);
+                XpathCEll.setCellType(Cell.CELL_TYPE_STRING);
                 data[i-1][3]=XpathCEll.getStringCellValue();
             }
 
